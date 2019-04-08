@@ -1,0 +1,32 @@
+<div class="container">
+    <br>
+    <div class="text-center card-header">
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="caseNumber" name="caseNumber" class="custom-control-input"
+                (click)="searchScreenToggle('caseNumber')">
+            <label class="custom-control-label" for="caseNumber">Case Number</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="name" name="caseNumber" class="custom-control-input"
+                (click)="searchScreenToggle('name')">
+            <label class="custom-control-label" for="name">Name</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="ssn" name="caseNumber" class="custom-control-input"
+                (click)="searchScreenToggle('ssn')">
+            <label class="custom-control-label" for="ssn">SSN</label>
+        </div>
+    </div>
+    <br>
+    <div *ngIf="sections.length > 0" class="card card-body bg-light">
+        <ng-template ngFor let-section [ngForOf]="sections">
+            <h3>{{section.name}}</h3>
+            <app-generic-form [fields]="section.fields" (formSubmitEvent)="onSubmit($event)"></app-generic-form>
+        </ng-template>
+    </div>
+    <br>
+    <br>
+    <div [hidden]="!showGrid">
+        <app-generic-grid #genericGrid></app-generic-grid>
+    </div>
+</div>
