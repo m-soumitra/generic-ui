@@ -30,7 +30,7 @@ export class CaseEnquiryComponent implements OnInit {
     searchScreenToggle(queryId: string) {
         this.sections = [];
         this.showGrid = false;
-        if (queryId === 'name' || queryId === 'ssn') {
+        if (queryId !== 'Select') {
             this.appService.fetchScreenCreateRespone(queryId).subscribe((res: any) => {
                 this.queryId = res.queryId;
                 const results = res.results as Results;
@@ -82,10 +82,12 @@ export class CaseEnquiryComponent implements OnInit {
     transformForGenericGridRequest(formSubmitted: FormGroup): SearchRequest {
         let searchRequest = {} as SearchRequest;
         searchRequest.queryId = this.queryId;
-        let singleInputFields: Map<string, string> = new Map();
+        // let singleInputFields: Map<string, string> = new Map();
+        let singleInputFields: { [name: string]: string } = {};
         Object.keys(formSubmitted.controls).forEach((key: string) => {
             console.log(key, ' ', formSubmitted.get(key).value);
-            singleInputFields.set(key, formSubmitted.get(key).value);
+            // singleInputFields.set(key, formSubmitted.get(key).value);
+            singleInputFields[key] = formSubmitted.get(key).value;
         });
         searchRequest.singleInputFields = singleInputFields;
         return searchRequest;
@@ -108,7 +110,7 @@ export class Section {
 export interface SearchRequest {
     token: string;
     queryId: string;
-    singleInputFields: Map<string, string>;
+    singleInputFields: { [name: string]: string };
     multiInputFields: Map<string, Array<string>>;
     gridMetadata?: SearchGridMetaData;
 }
