@@ -13,10 +13,7 @@
                         "type": "text",
                         "default": "Select",
                         "validations": [
-                            {
-                                "v1": "MIN_3",
-                                "v2": "NON_EMPTY"
-                            }
+                            
                         ]
                     },
                     {
@@ -25,10 +22,7 @@
                         "type": "text",
                         "default": "Select",
                         "validations": [
-                            {
-                                "v1": "MIN_3",
-                                "v2": "NON_EMPTY"
-                            }
+                            
                         ]
                     },
                     {
@@ -37,10 +31,7 @@
                         "type": "number",
                         "default": "Select SSN",
                         "validations": [
-                            {
-                                "v1": "MIN_3",
-                                "v2": "NON_EMPTY"
-                            }
+                            
                         ]
                     },
                     {
@@ -54,9 +45,7 @@
                             "3": "Mrs"
                         },
                         "validations": [
-                            {
-                                "v2": "NON_EMPTY"
-                            }
+                            
                         ]
                     }
                 ]

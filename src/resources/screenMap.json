@@ -1,0 +1,9 @@
+{
+    "message": "RESULT FOUND",
+    "statusCd": 200,
+    "results": {
+        "ssn": "SSN Screen",
+        "caseNumber": "Case Number",
+        "name": "Person Specific Details"
+    }
+}

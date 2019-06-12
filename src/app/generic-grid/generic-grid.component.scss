@@ -1,0 +1,17 @@
+:host {
+    ::ng-deep .ui-datatable.myTable {
+        padding-bottom: 35px !important;
+        padding-right: 40px !important;
+        padding-left: 40px !important;
+        background: red !important;
+        background-color: #1CA979 !important;
+    }
+}
+
+.child-table {
+    padding: 0 30px 30px;
+}
+
+.child-header {
+    background-color: darkgray !important;
+}

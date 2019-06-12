@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { Results } from './case-enquiry/case-enquiry.component';
-import { SearchRequest } from './case-enquiry/case-enquiry.component';
 import { environment } from 'src/environments/environment';
+import * as page from './interfaces/generic-page.interface';
+import { ScreenMap } from './interfaces/app.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +17,7 @@ export class AppService {
     constructor(private httpClient: HttpClient) { }
 
     public fetchScreenCreateRespone(queryId: string) {
-        console.log('env.prod', environment.production );
+        console.log('env.prod', environment.production);
         if (environment.production) {
             const reuqestParams = new HttpParams().set('queryId', queryId);
             return this.httpClient.get(environment.nameScreenUrl, { params: reuqestParams }).pipe(
@@ -37,7 +37,7 @@ export class AppService {
     }
 
 
-    public fetchGridResponse(searchRequest: SearchRequest, queryId?: string) {
+    public fetchGridResponse(searchRequest: page.SearchRequest, queryId?: string) {
         console.log('Search Request: ', searchRequest);
         if (environment.production) {
             return this.httpClient.post(environment.gridResponseUrl, searchRequest).pipe(
@@ -49,6 +49,13 @@ export class AppService {
                 catchError(this.handleError));
         }
 
+    }
+
+    public fetchScreenMap() {
+        console.log(environment.screenMapUrl)
+        return this.httpClient.get(environment.screenMapUrl).pipe(
+            map((response: ScreenMap) => response),
+            catchError(this.handleError));
     }
 
     private handleError(error: HttpErrorResponse) {

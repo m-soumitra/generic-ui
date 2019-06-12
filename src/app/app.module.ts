@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -8,17 +9,20 @@ import { AppComponent } from './app.component';
 
 import { GenericFormComponent } from './generic-form/generic-form.component';
 import { GenericGridComponent } from './generic-grid/generic-grid.component';
-import { CaseEnquiryComponent } from './case-enquiry/case-enquiry.component';
+import { FormTranslatorComponent } from './form-translator/form-translator.component';
 
-import { DataTableModule } from 'primeng/primeng';
+import { DataTableModule, MessageService } from 'primeng/primeng';
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
+import { ToastModule } from 'primeng/toast';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LayoutComponent,
     GenericFormComponent,
-    CaseEnquiryComponent,
+    FormTranslatorComponent,
     GenericGridComponent
   ],
   imports: [
@@ -29,9 +33,11 @@ import { PaginatorModule } from 'primeng/paginator';
     HttpClientModule,
     DataTableModule,
     TableModule,
-    PaginatorModule
+    PaginatorModule,
+    BrowserAnimationsModule,
+    ToastModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

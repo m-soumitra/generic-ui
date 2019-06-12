@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   nameScreenUrl: 'resources/name-response.json',
   ssnScreenUrl: 'resources/ssn-response.json',
-  gridResponseUrl: 'resources/grid-response.json'
+  gridResponseUrl: 'resources/grid-response.json',
+  screenMapUrl: 'resources/screenMap.json'
 };
 
 /*

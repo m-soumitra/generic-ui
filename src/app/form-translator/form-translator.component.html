@@ -1,0 +1,14 @@
+<div class="container">
+    <br>
+    <div *ngIf="sections.length > 0" class="card card-body bg-light">
+        <ng-template ngFor let-section [ngForOf]="sections">
+            <h3>{{section.name}}</h3>
+            <app-generic-form [fields]="section.fields" (formSubmitEvent)="onSubmit($event)"></app-generic-form>
+        </ng-template>
+    </div>
+    <br>
+    <br>
+    <div [hidden]="!showGrid">
+        <app-generic-grid #genericGrid></app-generic-grid>
+    </div>
+</div>

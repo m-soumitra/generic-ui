@@ -1,19 +1,47 @@
-<p-table #table [columns]="cols" [value]="gridData" [paginator]="true" [rows]="10" [responsive]="true" autoLayout ="true">
+<p-toast [baseZIndex]="5000"></p-toast>
+<p-table #table [columns]="cols" [value]="gridData" [paginator]="true" [rows]="10" [responsive]="true" autoLayout="true"
+    [rowsPerPageOptions]="rowsPerPageOptions" dataKey="dataKey" [pageLinks]="3">
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            <th *ngFor="let col of columns">
                 {{col.header}}
-                <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
-                    ariaLabelDesc="Activate to sort in descending order"
-                    ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
             </th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <ng-template pTemplate="body" let-parentData let-columns="columns" let-expanded="expanded">
         <tr>
             <td *ngFor="let col of columns">
-                {{rowData[col.field]}}
+                <span *ngIf="parentData.rowData[col.field] === 'rowExpansionTrue'">
+                    <a [ngClass]="isExpandable ? '' : 'disable-expand'" href="#" title="Expand/Collapse Row"
+                        [pRowToggler]="row">
+                        <em [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></em>
+                    </a>
+                </span>
+                <span
+                    *ngIf="parentData.rowData[col.field] !== 'rowExpansionTrue'">{{parentData.rowData[col.field]}}</span>
             </td>
         </tr>
     </ng-template>
+    <ng-template pTemplate="rowexpansion" let-parentData>
+        <tr>
+            <td [attr.colspan]="4">
+                <div class="child-table">
+                    <p-table [columns]="childCols" [value]="parentData.childRowGridValues" [autoLayout]="true">
+                        <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th class="child-header" *ngFor="let col of columns" [pSortableColumn]="col.field">
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData>
+        <tr>
+            <td *ngFor="let col of childCols">
+                <span title="{{ rowData[col.field]}}">{{rowData[col.field]}}</span></td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>
+</ng-template>
 </p-table>
